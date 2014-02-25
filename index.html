@@ -20,15 +20,26 @@
                 $("#wrap").redimensionar();
             }
 
+            //ADD SCROLLABLE============================
+            $(".receberpostit").addClass("scrollable");
+
             //SORTABLE============================
             $( "ul.receberpostit" ).sortable({
-              connectWith: "ul"
+                connectWith: "ul.receberpostit",
+                start:function(event,ui){
+                    $(this).removeClass("scrollable");
+                },
+                stop:function(event,ui){
+                    $(this).addClass("scrollable");
+                }
             });
             $( ".receberpostit" ).disableSelection();
 
             //DRAG============================
-            $(".openpostits").draggable();
-            $(".postits").draggable();
+            $(".openpostits").draggable({
+                containment:"window"
+            });
+            $(".postits").draggable({});
 
             //OPEN AND CLOSE POST-ITS============================
             $(".openpostits").click(function(){
@@ -54,10 +65,10 @@
             });
             
             //EXPAND============================
-            $("li.postit").click(function(){
+            $("li.postit").dblclick(function(){
                 $(this).expand("postit");
             });
-            $("div.zoomarea a").click(function(){
+            $("div.zoomarea a").dblclick(function(){
                 $(this).expand("area");
             });
 
@@ -82,6 +93,12 @@
             Concluir o curso e pegar o diploma
         </li>
         <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="7" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
             Concluir o curso e pegar o diploma
         </li>
     </ul>        

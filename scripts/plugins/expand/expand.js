@@ -53,7 +53,7 @@
 
             $(selector).animate({"opacity":"0"});
             $("div[bigareacanvas-id]").attr("bigareacanvas-id","big_"+id);
-            //$(selectorbig).animate({"opacity":"1"},time).append(conteudo);
+            $(selectorbig).animate({"opacity":"1"},time).append(conteudo);
             $(selectorbig+" h1").append(tituloarea);
 
             //close
