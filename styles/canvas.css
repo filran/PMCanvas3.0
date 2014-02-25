@@ -1,0 +1,211 @@
+/*LAYOUT STANDARD ======================= */
+ul{ list-style-type: none; margin:0px; padding:0px;}
+
+body{ font-family:"Arial"; margin:0; padding:0; overflow:hidden; background-color:#ccc;}
+
+h1{ margin:0; padding:0; font-size:1em; }
+
+
+/*CANVAS'S LAYOUT=============================*/
+    #wrap{
+        width:800;
+        height:600;
+    }
+
+
+    .centralizar_div{
+        margin:0 auto 0 auto;
+    }
+
+
+    #pmcanvas{
+        width:99%;
+        height:99%;
+        padding:1%;
+        margin-left:-0.5%;
+    }
+    #pmcanvas li{
+        float:left;
+    }
+
+
+    #header{
+        margin:0 0 1% 0;
+        width:100%;
+        height:4%;
+    }
+    #header h1{
+        font-size:1.2em;
+    }
+    #header > li{
+        height:100%;
+    }
+    #gp, #pitch{
+        padding:0.5% 0 0 0;
+    }
+    #gp{
+        width:40%;
+    }
+
+    .area li{
+        width:17%;
+        padding:1%;
+        background-color:white;
+    }
+
+    .margem_emcima{
+        margin-top:1%;
+    }
+    .margem_direita{
+        margin-right:1%;
+    }
+    .margem_embaixo{
+        margin-bottom:1%;
+    }
+    .margem_esquerda{
+        margin-left:1%;
+    }
+
+    #area #riscos, #area #tempo, #area #custos{
+        width:18%;
+    }
+
+    /*altura total da area 88%*/
+
+    #just, #prod {
+        height:22%;
+    }
+
+    #obj{ 
+        height:18%;
+        margin:-6% 1% 0 0;
+    }
+
+    #requisitos{
+        margin:-6% 0 0 0;
+        height:62.2%;
+    }
+
+    #beneficios{
+        margin:29.5% 0 0 -60%;
+        width:37%;
+        height:14.7%;
+    }
+
+    #custos{
+        height:20%;
+    }
+
+    #stake, #premissas, #riscos{
+        height:30%;
+    }
+
+    #equipe, #entregas{
+        height:35%;
+    }
+
+    #tempo{
+        height:30%;
+    }
+
+    #restricoes{
+        height:40%;
+        margin:10.5% 0 0 -100%;
+    }
+
+
+/*POST-IT=======================================*/
+    .receberpostit{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        float: left;
+    }
+    #postits > ul.receberpostit{
+        width:99%;
+        height:99%;
+        margin:1%;
+        background-color:orange;
+    }
+
+    /*ajustando área para receber os postits*/
+    #area > li > ul.receberpostit{ width:100%; position:relative;}
+    #just ul , #prod ul{ height:90%; }
+    #stake ul , #premissas ul, #riscos ul, #tempo ul{ height:92%; }
+    #obj ul, #custos ul{ height:88%; }
+    #restricoes ul, #equipe ul, #entregas ul{ height:94%; }
+    #requisitos ul{ height:96%; }
+    #beneficios ul{ height:85%; }
+    
+    .postit{
+        width:100px;
+        height:100px;
+        background-color:yellow;
+        margin:4px;
+        padding:4px;
+        float:left;
+    }
+    .postit:hover{ cursor:pointer; z-index:1; }
+
+    #area .postit{
+        width:98%;
+        height:auto;
+        background-color:yellow;
+        margin:0 0 2% 0;
+    }
+    
+
+
+    .postits{
+        width:50%;
+        height:50%;
+        margin:14.5% 0 0 25%;
+        background-color:gray;
+        position:absolute;
+        z-index:-1;
+        opacity:0;
+    }
+
+    .postits:hover{
+        cursor:pointer;   
+    }
+
+/*OPEN POST-ITS=========================*/
+    .openpostits{
+        width:40;
+        height:40;
+        position:absolute;
+        background-color:orange;
+        border-radius: 50%;
+        right:0;
+        z-index:1;        
+    }
+    .openpostits:hover{
+        cursor:pointer;
+    }
+    .openpostits span{
+        position:absolute;
+        top:25%;
+        width:100%;
+        text-align:center;
+        font-size:1.25em;
+        font-weight:bold;
+    }
+    
+
+
+/*ZOOM AREA==============================*/
+.zoomarea{
+    position:relative;
+    margin:-20 0 0 90%;
+    text-align:right;
+}
+.zoomarea a{
+    font-weight:bold;
+    text-decoration:none;
+    color:black;
+}
+.zoomarea a:hover{
+    color:gray;
+}
+

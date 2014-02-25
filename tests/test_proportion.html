@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="../scripts/QUnit/qunit-git.js"></script>
+    <link href="../scripts/QUnit/qunit-git.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../scripts/proportion.js"></script>
+    <script type="text/javascript">
+        //testing newsizescreen
+        test("newsizescreen", function(){
+            w = 800;
+            h = 600;
+
+            n = proportion(w,h, 675);
+            equal(n,900);
+
+            n = proportion(w,h, 300);
+            equal(n,400);
+
+            n = proportion(w,h, 1080);
+            equal(n,1440);
+
+            n = proportion(w,h, 971);
+            equal(n,1295);
+      
+        });
+
+    </script>
+    <style type="text/css">
+       
+    </style>
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+</body>
+</html>

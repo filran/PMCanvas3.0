@@ -1,0 +1,158 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+
+    <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/javascript" src="scripts/proportion.js"></script>
+    <script type="text/javascript" src="scripts/plugins/redimensionar.js"></script>
+
+    <script type="text/javascript" src="scripts/plugins/expand/expand.js"></script>
+    <link type="text/css" rel="stylesheet" href="scripts/plugins/expand/expand.css" >
+
+    <link type="text/css" rel="stylesheet" href="styles/canvas.css">
+    
+     <script type="text/javascript">
+        $(function(){
+            //REDIMENSIONAR============================
+            $("#wrap").redimensionar();
+            window.onresize = function(){
+                $("#wrap").redimensionar();
+            }
+
+            //SORTABLE============================
+            $( "ul.receberpostit" ).sortable({
+              connectWith: "ul"
+            });
+            $( ".receberpostit" ).disableSelection();
+
+            //DRAG============================
+            $(".openpostits").draggable();
+            $(".postits").draggable();
+
+            //OPEN AND CLOSE POST-ITS============================
+            $(".openpostits").click(function(){
+                zindex = $("#postits").css("z-index");
+                if( zindex < 0 ){
+                    $("#postits").animate({opacity:1},"fast").css({"z-index":1});
+                }else{
+                    $("#postits").animate({opacity:0},"fast",function(){
+                        $(this).css({"z-index":-1});
+                    });
+                }                
+            });
+            $(".postits").dblclick(function(){
+                $(this).animate({opacity:0},"fast",function(){
+                    $(this).css({"z-index":-1});
+                });
+            });
+
+            //INSERIR ÍCONE DE ZOOM NAS ÁREAS DO CANVAS==========================
+            $("#area > li").each(function(){
+                idarea = $(this).attr("id");
+                $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
+            });
+            
+            //EXPAND============================
+            $("li.postit").click(function(){
+                $(this).expand("postit");
+            });
+            $("div.zoomarea a").click(function(){
+                $(this).expand("area");
+            });
+
+        });
+     </script>
+</head>
+<body>
+<div class="openpostits"><span>P's</span></div>
+
+<ul id="postits" class="postits">
+    <ul class="receberpostit"> 
+        <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+        <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Concluir o curso e pegar o diploma
+        </li>
+    </ul>        
+</ul>
+
+<div id="wrap" class="centralizar_div">
+
+    <ul id="pmcanvas">
+        <ul id="header">
+            <li id="gp"><div><h1>GP</h1></div></li>
+            <li id="pitch"><div><h1>PITCH</h1></div></li>
+        </ul>
+
+        <ul id="area" class="area">
+            <li id="just" class="margem_direita margem_embaixo"><h1>JUSTIFICATIVAS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+
+            <li id="prod" class="margem_direita margem_embaixo"><h1>PRODUTO</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="stake" class="margem_direita margem_embaixo"><h1>STAKEHOLDERS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="premissas" class="margem_direita margem_embaixo"><h1>PREMISSAS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="riscos" class="margem_embaixo"><h1>RISCOS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+
+
+            <li id="obj" class="margem_direita margem_embaixo"><h1>OBJETIVOS SMART</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+
+            <li id="requisitos" class="margem_direita"><h1>REQUISITOS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="equipe" class="margem_direita margem_embaixo margem_esquerda"><h1>EQUIPE</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="entregas" class="margem_direita margem_embaixo"><h1>GRUPO DE ENTREGAS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+            
+            <li id="tempo" class="margem_embaixo"><h1>TEMPO</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+
+
+            <li id="beneficios"><h1>BENEFÍCIOS</h1>
+                <ul class="receberpostit"></ul>
+            </li>
+         
+            <li id="restricoes"><h1>RESTRIÇÕES</h1>
+                <ul class="receberpostit"></ul>
+            </li> 
+
+            <li id="custos"><h1>CUSTOS</h1>
+                <ul class="receberpostit"></ul>
+            </li>          
+        </ul>     
+    </ul>
+</div>
+
+</body>
+
+</html>
