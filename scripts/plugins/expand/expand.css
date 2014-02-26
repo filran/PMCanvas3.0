@@ -33,5 +33,12 @@
     z-index:1;
     font-size:2em;
     position:absolute;
+    overflow-x:hidden;
+}
+.bigareacanvas .postit{
+    width:30%;
+    height:150px;
+    background-color:yellow;
+    font-size:0.75em;
 }
 

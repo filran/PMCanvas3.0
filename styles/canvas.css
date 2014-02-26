@@ -120,19 +120,20 @@ h1{ margin:0; padding:0; font-size:1em; }
         margin: 0;
         padding: 0;
         float: left;
+        text-align:center;
     }
     #postits > ul.receberpostit{
         width:98%;
-        height:96%;
+        height:94%;
         margin:1%;
-        background-color:orange;
+        background-color:;
     }
     .scrollable{
         overflow-x:hidden;
     }
 
     /*ajustando área para receber os postits*/
-    #area > li > ul.receberpostit{ width:100%; position:relative;}
+    #area > li > ul.receberpostit{ width:100%;}
     #just ul , #prod ul{ height:90%; }
     #stake ul , #premissas ul, #riscos ul, #tempo ul{ height:92%; }
     #obj ul, #custos ul{ height:88%; }
@@ -146,9 +147,11 @@ h1{ margin:0; padding:0; font-size:1em; }
         background-color:yellow;
         margin:4px;
         padding:4px;
-        float:left;
-    }
+        float:left;  
+    }    
+    
     .postit:hover{ cursor:pointer; z-index:1; }
+
 
     #area .postit{
         width:98%;
@@ -161,8 +164,8 @@ h1{ margin:0; padding:0; font-size:1em; }
 
     .postits{
         width:50%;
-        height:20%;
-        margin:14.5% 0 0 25%;
+        height:60%;
+        margin:12.5% 0 0 25%;
         background-color:gray;
         position:absolute;
         z-index:-1;
@@ -211,11 +214,3 @@ h1{ margin:0; padding:0; font-size:1em; }
 .zoomarea a:hover{
     color:gray;
 }
-
-
-
-.placeholder {
-    border: 1px dotted black;
-    margin: 0 1em 1em 0;
-    height: 50px;
-  }

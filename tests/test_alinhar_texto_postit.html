@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="../scripts/jquery/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="../scripts/QUnit/qunit-git.js"></script>
+    <link href="../scripts/QUnit/qunit-git.css" rel="stylesheet">
+
+
+    <script type="text/javascript">
+
+        $(function(){
+                                   
+        });
+        
+
+    </script>
+    <style type="text/css">
+        .postit{
+            width:100px;
+            height:100px;
+            background-color:yellow;
+            margin:4px;
+            padding:4px;
+            float:left;
+        }  
+        
+        .postits div{
+            background-color:red;
+            height:100;
+
+            display:table-cell;
+            vertical-align:middle;
+            text-align:center;
+        }
+        </style>
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<ul id="postits" class="postits">
+    <ul class="receberpostit"> 
+        <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            <div>Colesterol aumentado</div>
+        </li>
+        <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Imagem mal cuidada
+        </li>
+        <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Mobilidade reduzida
+        </li>
+        <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Roupas não vestem
+        </li>
+        <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Eu reeducado e 10kg mais magro
+        </li>
+        <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            <span>Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500</span>
+        </li>
+    </ul>        
+</ul>
+
+</body>
+</html>

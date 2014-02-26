@@ -10,10 +10,12 @@
     <script type="text/javascript" src="scripts/plugins/expand/expand.js"></script>
     <link type="text/css" rel="stylesheet" href="scripts/plugins/expand/expand.css" >
 
+    <script type="text/javascript" src="scripts/plugins/cortar_texto.js"></script>
+
     <link type="text/css" rel="stylesheet" href="styles/canvas.css">
     
      <script type="text/javascript">
-        $(function(){
+        $(function(){        
             //REDIMENSIONAR============================
             $("#wrap").redimensionar();
             window.onresize = function(){
@@ -26,12 +28,12 @@
             //SORTABLE============================
             $( "ul.receberpostit" ).sortable({
                 connectWith: "ul.receberpostit",
-                start:function(event,ui){
+                /*start:function(event,ui){
                     $(this).removeClass("scrollable");
                 },
                 stop:function(event,ui){
                     $(this).addClass("scrollable");
-                }
+                }*/
             });
             $( ".receberpostit" ).disableSelection();
 
@@ -72,34 +74,59 @@
                 $(this).expand("area");
             });
 
+            
+            //CORTAR TEXTO DOS POST-IT
+            $(".postit").cortar_texto(50);
+
+            $(".texto").css({"visibility":"hidden"});
+            
+
         });
      </script>
 </head>
 <body>
+
+            <div class="texto">Colesterol aumentado</div>
+
 <div class="openpostits"><span>P's</span></div>
 
 <ul id="postits" class="postits">
     <ul class="receberpostit"> 
         <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Colesterol aumentado
         </li>
         <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Imagem mal cuidada
         </li>
         <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Mobilidade reduzida
         </li>
         <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Roupas não vestem
         </li>
         <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Eu reeducado e 10kg mais magro
         </li>
         <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+            Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500
         </li>
-        <li postit-id="7" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
-            Concluir o curso e pegar o diploma
+        <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Colesterol aumentado
+        </li>
+        <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Imagem mal cuidada
+        </li>
+        <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Mobilidade reduzida
+        </li>
+        <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Roupas não vestem
+        </li>
+        <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Eu reeducado e 10kg mais magro
+        </li>
+        <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500
         </li>
     </ul>        
 </ul>

@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="../scripts/jquery/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="../scripts/QUnit/qunit-git.js"></script>
+    <link href="../scripts/QUnit/qunit-git.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../scripts/plugins/cortar_texto.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            $("[postit-id=1]").cortar_texto(4);
+            texto1 = $("[postit-id=1]").text();
+
+            $("[postit-id=6]").cortar_texto(4);
+            texto2 = $("[postit-id=6]").text();
+
+            test("cortar_texto",function(){
+               equal( texto1 , "Colesterol aumentado" , "não corta o texto");
+
+               coles = "Colesterol aumentado";
+               equal( coles.length , 20 , "qtd de caracteres");
+
+               equal( texto2 , "Emag..." , "texto cortado");
+               
+            });
+                       
+        });
+        
+
+    </script>
+    <style type="text/css">
+       
+    </style>
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<ul class="receberpostit"> 
+        <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Colesterol aumentado
+        </li>
+        <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Imagem mal cuidada
+        </li>
+        <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Mobilidade reduzida
+        </li>
+        <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Roupas não vestem
+        </li>
+        <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Eu reeducado e 10kg mais magro
+        </li>
+        <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="Justificativa">
+            Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500
+        </li>
+    </ul>
+
+</body>
+</html>

@@ -6,6 +6,8 @@
     //open expand
     $.fn.expand = function( tipo ){
         //o tipo é se for para amplicar post ou área
+
+        var time = 100; 
         
         $("<div id='backgroundexpand' class='backgroundexpand'></div>").appendTo("body");
         
@@ -49,7 +51,7 @@
             var selectorbig = "div[bigareacanvas-id=big_"+id+"]";
             var time = 100; 
             var tituloarea = $(selector+" h1").text();
-            //var conteudo = $(selector+" > ul.receberpostit > li");  
+            var conteudo = $(selector+" > ul.receberpostit > li");  
 
             $(selector).animate({"opacity":"0"});
             $("div[bigareacanvas-id]").attr("bigareacanvas-id","big_"+id);
@@ -66,9 +68,11 @@
                     });  
                 });
                 $(selector).animate({"opacity":"1"},time);
+                $(selector+" > ul.receberpostit").append(conteudo);
             });
         }
 
             
     }    
 })(jQuery);
+
