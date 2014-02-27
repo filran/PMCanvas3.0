@@ -33,27 +33,55 @@
 
             //ABRIR E FECHAR OPENPOSTITS============================
             $(".postits").css({"visibility":"hidden"});
+            $(".postits .postit").hide();
+            
             $(".openpostits").draggable({
                 containment:"window",
-                revert:"invalid",
             }).mousedown(function(){
                 $("#area > li").droppable({
                     accept:".openpostits",
                     activate:function(event,ui){
-                        $(".postits").fadeOut(100,function(){
-                            $(this).css({"visibility":"hidden"});
-                            $(".postits .postit").show();
-                        });  
+                        ocultarPostits();
+                        $(".postits").attr("drop","auto");
                     },
-                    deactivate:function(event,ui){
-                        $(".postits").css({"visibility":"show"}).fadeIn(100);
-                    },
-                    drop:function(){
-                        id = ($(this).attr("id"));
-                        $(".postits .postit:not([areacandidata="+id+"])").hide();                     
-                    },
+                    drop:function(event,ui){
+                        mostrarPostits(this);
+                    }
                 });
+            }).click(function(event,ui){
+                //somente ABRIR se openpostits estiver em alguma área do canvas
+                topo = $(this).css("top");
+                display = $(".postits").css("display");
+                visibility = $(".postits").css("visibility");
+
+                //drop = auto - não está na área
+                //drop = "area" - dropado na area
+
+                drop = $(".postits").attr("drop");
+
+                //mostrar somente quando estiver na área
+                if( drop!="auto" && drop!="out" ){
+                    if( visibility=="visible" ){
+                        ocultarPostits();
+                    }else{
+                        mostrarPostits(this);
+                    }
+                }                
             });
+
+            function mostrarPostits(seletor){
+                id = ($(seletor).attr("id"));        
+                $(".postits .postit[areacandidata="+id+"]").show();                     
+                $(".postits").css({"visibility":"show"}).fadeIn(100);
+                $(".postits").attr("drop",id);
+            }
+
+            function ocultarPostits(seletor){
+                $(".postits").fadeOut(100,function(){
+                    $(this).css({"visibility":"hidden"});
+                    $(".postits .postit").hide();
+                });                
+            }
 
             //DRAG=================================                       
             $(".postits").draggable({});
@@ -93,7 +121,7 @@
 
 <div class="openpostits"><span>P's</span></div>
 
-<ul id="postits" class="postits">
+<ul id="postits" class="postits" drop="auto">
     <ul class="receberpostit"> 
         <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="just">
             Colesterol aumentado
