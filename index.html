@@ -3,7 +3,10 @@
     <meta charset="utf-8"/>
 
     <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>
+    
     <script type="text/javascript" src="scripts/jquery-ui/jquery-ui-1.10.4.custom.js"></script>
+    <link type="text/css" rel="stylesheet" href="scripts/jquery-ui/jquery-ui-1.10.4.custom.css">
+    
     <script type="text/javascript" src="scripts/proportion.js"></script>
     <script type="text/javascript" src="scripts/plugins/redimensionar.js"></script>
 
@@ -22,6 +25,7 @@
                 $("#wrap").redimensionar();
             }
 
+
             //ADD SCROLLABLE============================
             $(".receberpostit").addClass("scrollable");
 
@@ -30,6 +34,8 @@
                 connectWith: "ul.receberpostit",
             });
             $( ".receberpostit" ).disableSelection();
+
+
 
             //ABRIR E FECHAR OPENPOSTITS============================
             $(".postits").css({"visibility":"hidden"});
@@ -45,18 +51,15 @@
                         $(".postits").attr("drop","auto");
                     },
                     drop:function(event,ui){
-                        mostrarPostits(this);
+                        id = $(this).attr("id");
+                        mostrarPostits(id);
                     }
                 });
             }).click(function(event,ui){
-                //somente ABRIR se openpostits estiver em alguma área do canvas
-                topo = $(this).css("top");
-                display = $(".postits").css("display");
                 visibility = $(".postits").css("visibility");
-
+                
                 //drop = auto - não está na área
                 //drop = "area" - dropado na area
-
                 drop = $(".postits").attr("drop");
 
                 //mostrar somente quando estiver na área
@@ -64,27 +67,41 @@
                     if( visibility=="visible" ){
                         ocultarPostits();
                     }else{
-                        mostrarPostits(this);
+                        mostrarPostits(drop);
                     }
                 }                
             });
-
-            function mostrarPostits(seletor){
-                id = ($(seletor).attr("id"));        
+            
+            function mostrarPostits(id){        
                 $(".postits .postit[areacandidata="+id+"]").show();                     
                 $(".postits").css({"visibility":"show"}).fadeIn(100);
                 $(".postits").attr("drop",id);
             }
 
-            function ocultarPostits(seletor){
+            function ocultarPostits(){
                 $(".postits").fadeOut(100,function(){
                     $(this).css({"visibility":"hidden"});
                     $(".postits .postit").hide();
                 });                
+            }            
+
+
+            //AUTOAJUSTAR POSTITS================================
+            /*
+            ler quantidade de colunas
+            ler largura,margin e padding de cada postit
+            ler margin e padding do wrap
+            descobrir largura para caber os postits{
+                largura postit = margim e padding da dir e esq + largura
+                largura total dos post-its = largura postit * quantidade de postit + padding da esq e da dir do wrap                
             }
+                
+            
+            
+            */
 
             //DRAG=================================                       
-            $(".postits").draggable({});
+            $(".postits").draggable({}).resizable();
 
  
             $(".postits").dblclick(function(){
