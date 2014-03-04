@@ -1,91 +1,76 @@
+<!DOCTYPE>
 <html>
 <head>
     <meta charset="utf-8"/>
 
-    <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>
-    
+    <!--jQuery + jQuery UI-->
+    <!--jQuery 1.8-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script type="text/javascript">
+	    var jq18 = jQuery.noConflict();
+    </script>
+        
+    <!--jQuery 2.1-->
+    <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>        
+	 
     <script type="text/javascript" src="scripts/jquery-ui/jquery-ui-1.10.4.custom.js"></script>
     <link type="text/css" rel="stylesheet" href="scripts/jquery-ui/jquery-ui-1.10.4.custom.css">
-    
+
+    <!--Proportion-->
     <script type="text/javascript" src="scripts/proportion.js"></script>
+
+    <!--Redimensionar-->
     <script type="text/javascript" src="scripts/plugins/redimensionar.js"></script>
 
+    <!--Expand-->
     <script type="text/javascript" src="scripts/plugins/expand/expand.js"></script>
     <link type="text/css" rel="stylesheet" href="scripts/plugins/expand/expand.css" >
 
+    <!--Cortar texto-->
     <script type="text/javascript" src="scripts/plugins/cortar_texto.js"></script>
 
+    <!--Canvas-->
     <link type="text/css" rel="stylesheet" href="styles/canvas.css">
+
+	<!-- keyboard-->
+	<script type="text/javascript" src="scripts/plugins/keyboard/keyboard_files/keyboard.js"></script>
+	<link type="text/css" rel="stylesheet" href="scripts/plugins/keyboard/keyboard_files/style.css">
+
     
-     <script type="text/javascript">
+    <script type="text/javascript">
         $(function(){        
-            //REDIMENSIONAR============================
+            //#WRAP=======================================
+            //Redimensionar
             $("#wrap").redimensionar();
             window.onresize = function(){
                 $("#wrap").redimensionar();
             }
 
 
-            //ADD SCROLLABLE============================
-            $(".receberpostit").addClass("scrollable");
+            //.RECEBERPOST-IT=======================================
+            $(".receberpostit")
+                .addClass("scrollable")//add scrollable
+                .disableSelection(); // disable sortable
 
-            //SORTABLE============================
+
+            //UL.RECEBERPOSTIT=======================================
+            //sortable
             $( "ul.receberpostit" ).sortable({
                 connectWith: "ul.receberpostit",
-            });
-            $( ".receberpostit" ).disableSelection();
+            });     
 
 
-
-            //ABRIR E FECHAR OPENPOSTITS============================
-            $(".postits").css({"visibility":"hidden"});
-            $(".postits .postit").hide();
-            
-            $(".openpostits").draggable({
-                containment:"window",
-            }).mousedown(function(){
-                $("#area > li").droppable({
-                    accept:".openpostits",
-                    activate:function(event,ui){
-                        ocultarPostits();
-                        $(".postits").attr("drop","auto");
-                    },
-                    drop:function(event,ui){
-                        id = $(this).attr("id");
-                        mostrarPostits(id);
-                    }
-                });
-            }).click(function(event,ui){
-                visibility = $(".postits").css("visibility");
-                
-                //drop = auto - não está na área
-                //drop = "area" - dropado na area
-                drop = $(".postits").attr("drop");
-
-                //mostrar somente quando estiver na área
-                if( drop!="auto" && drop!="out" ){
-                    if( visibility=="visible" ){
-                        ocultarPostits();
-                    }else{
-                        mostrarPostits(drop);
-                    }
-                }                
-            });
-            
-            function mostrarPostits(id){        
-                $(".postits .postit[areacandidata="+id+"]").show();                     
-                $(".postits").css({"visibility":"show"}).fadeIn(100);
-                $(".postits").attr("drop",id);
-            }
-
-            function ocultarPostits(){
-                $(".postits").fadeOut(100,function(){
-                    $(this).css({"visibility":"hidden"});
-                    $(".postits .postit").hide();
+            //.POSTITS=======================================
+            //abrir e fechar openpostits
+            $(".postits")
+                .css({"visibility":"hidden"})
+                .draggable({})
+                .resizable()
+                .dblclick(function(){
+                    $(this).fadeOut(100,function(){
+                        $(this).css({"visibility":"hidden"});
+                    });
                 });                
-            }            
-
-
             //AUTOAJUSTAR POSTITS================================
             /*
             ler quantidade de colunas
@@ -94,42 +79,127 @@
             descobrir largura para caber os postits{
                 largura postit = margim e padding da dir e esq + largura
                 largura total dos post-its = largura postit * quantidade de postit + padding da esq e da dir do wrap                
-            }
-                
-            
-            
+            }           
             */
 
-            //DRAG=================================                       
-            $(".postits").draggable({}).resizable();
 
- 
-            $(".postits").dblclick(function(){
-                $(this).fadeOut(100,function(){
-                    $(this).css({"visibility":"hidden"});
+            //.POSTITS .POSTIT=======================================
+            $(".postits .postit")
+                .hide();
+
+
+            //.OPENPOSTIT=======================================
+            $(".openpostits")
+                .draggable({
+                    containment:"window",
+                })
+                .mousedown(function(){
+                    $("#area > li")
+                        .droppable({
+                            accept:".openpostits",
+                            activate:function(event,ui){
+                                ocultarPostits();
+                                $(".postits").attr("drop","auto");
+                            },
+                            drop:function(event,ui){
+                                id = $(this).attr("id");
+                                mostrarPostits(id);
+                            }
+                        });
+                })
+                .click(function(event,ui){
+                    visibility = $(".postits").css("visibility");
+                    drop = $(".postits").attr("drop");
+
+                    //mostrar somente quando estiver na área
+                    if( drop!="auto" && drop!="out" ){
+                        if( visibility=="visible" ){
+                            ocultarPostits();
+                        }else{
+                            mostrarPostits(drop);
+                        }
+                    }                
                 });
-            });
+                        function mostrarPostits(id){        
+                            $(".postits .postit[areacandidata="+id+"]").show();                     
+                            $(".postits").css({"visibility":"show"}).fadeIn(100);
+                            $(".postits").attr("drop",id);
+                        }
+                        function ocultarPostits(){
+                            $(".postits").fadeOut(100,function(){
+                                $(this).css({"visibility":"hidden"});
+                                $(".postits .postit").hide();
+                            });                
+                        }  
 
-            //INSERIR ÍCONE DE ZOOM NAS ÁREAS DO CANVAS==========================
-            $("#area > li").each(function(){
-                idarea = $(this).attr("id");
-                $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
-            });
-            
-            //EXPAND============================
-            $("li.postit").dblclick(function(){
-                $(this).expand("postit");
-            });
-            $("div.zoomarea a").dblclick(function(){
-                $(this).expand("area");
-            });
 
-            
-            //CORTAR TEXTO DOS POST-IT
-            $(".postit").cortar_texto(50);
+            //NEWPOSTIT=======================================
+            //draggable
+            $(".newpostit")
+                .draggable({
+                    containment:"window",                
+                })
+                .mousedown(function(){
+                    $("#area > li")
+                        .droppable({
+                            accept:".newpostit",
+                            activate: function(event,ui){
+                                //$(this).append("activate");
+                            },
+                            drop: function(event,ui){   
+                                var id = $(this).attr("id"); 
+                                $("#"+id+" > ul.receberpostit").append('<li postit-id="0" class="postit" autor="Filipe Arantes" areacandidata="'+id+'">ASDF</li>');
+                                $("#"+id+" > ul.receberpostit > li:last").expand("postit");
+                                
+                                mostrarTeclado();
+                            }                           
+                        });
+                }).click(function(event,ui){
 
-            $(".texto").css({"visibility":"hidden"});
+                });
+                        function mostrarTeclado(){
+                            $("#container_keyboard").css({"display":"block"});
+                        }
+                          
+
+            //#AREA > LI=======================================
+            //inserir ícone de zoom nas áreas do canvas
+            $("#area > li")
+                .each(function(){
+                    idarea = $(this).attr("id");
+                    $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
+                });
             
+
+            //LI.POSTIT=======================================
+            //expand
+            $(".postit")
+                .dblclick(function(){
+                    $(this).expand("postit");
+                });
+            
+
+            //DIV.ZOOMAREA A=======================================
+            //expand                      
+            $("div.zoomarea a")
+                .dblclick(function(){
+                    $(this).expand("area");
+                });
+                
+
+            //CORTAR TEXTO DOS POST-IT=======================================
+            $(".postit")
+                .cortar_texto(50);
+
+
+            //.TEXTO=======================================
+            $(".texto")
+                .css({"visibility":"hidden"});            
+          
+
+            //CONTEINER_KEYBOARD=======================================
+            $("#container_keyboard")
+                .draggable();
 
         });
      </script>
@@ -137,6 +207,67 @@
 <body>
 
 <div class="openpostits"><span>P's</span></div>
+<div class="newpostit"><span>NP</span></div>
+
+<div id="container_keyboard">
+	<ul id="keyboard">
+		<li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+		<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+		<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+		<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+		<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+		<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+		<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+		<li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
+		<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+		<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+		<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+		<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+		<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+		<li class="delete lastitem">delete</li>
+		<li class="tab">tab</li>
+		<li class="letter">q</li>
+		<li class="letter">w</li>
+		<li class="letter">e</li>
+		<li class="letter">r</li>
+		<li class="letter">t</li>
+		<li class="letter">y</li>
+		<li class="letter">u</li>
+		<li class="letter">i</li>
+		<li class="letter">o</li>
+		<li class="letter">p</li>
+		<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+		<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+		<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+		<li class="capslock">caps lock</li>
+		<li class="letter">a</li>
+		<li class="letter">s</li>
+		<li class="letter">d</li>
+		<li class="letter">f</li>
+		<li class="letter">g</li>
+		<li class="letter">h</li>
+		<li class="letter">j</li>
+		<li class="letter">k</li>
+		<li class="letter">l</li>
+		<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+		<li class="symbol"><span class="off">'</span><span class="on">"</span></li>
+		<li class="return lastitem">return</li>
+		<li class="left-shift">shift</li>
+		<li class="letter">z</li>
+		<li class="letter">x</li>
+		<li class="letter">c</li>
+		<li class="letter">v</li>
+		<li class="letter">b</li>
+		<li class="letter">n</li>
+		<li class="letter">m</li>
+		<li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+		<li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+		<li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+		<li class="right-shift lastitem">shift</li>
+		<li class="space lastitem">&nbsp;</li>
+	</ul>
+</div>
+
 
 <ul id="postits" class="postits" drop="auto">
     <ul class="receberpostit"> 
@@ -189,7 +320,9 @@
 
         <ul id="area" class="area">
             <li id="just" class="margem_direita margem_embaixo"><h1>JUSTIFICATIVAS</h1>
-                <ul class="receberpostit"></ul>
+                <ul class="receberpostit">
+                    <li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="just"></li>
+                </ul>
             </li>
 
             <li id="prod" class="margem_direita margem_embaixo"><h1>PRODUTO</h1>

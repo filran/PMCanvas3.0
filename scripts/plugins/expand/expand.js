@@ -38,7 +38,9 @@
                         $(this).remove();
                     });  
                 });
-                $(selector).animate({"opacity":"1"},time);
+                $(selector).animate({"opacity":"1"},time,function(){
+                    $(".backgroundexpand").remove();
+                });
             });
             
         }else if(tipo=="area"){
@@ -67,7 +69,9 @@
                         $(this).remove();
                     });  
                 });
-                $(selector).animate({"opacity":"1"},time);
+                $(selector).animate({"opacity":"1"},time,function(){
+                    $(".backgroundexpand").remove();
+                });
                 $(selector+" > ul.receberpostit").append(conteudo);
             });
         }

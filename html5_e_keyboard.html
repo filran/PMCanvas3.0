@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8"/>
+
+    <!--jQuery + jQuery UI-->
+    <!--jQuery 2.1-->
+    <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>        
+
+    <!--jQuery 1.8-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script type="text/javascript"> var jq18 = jQuery.noConflict(); </script>
+
+    <script type="text/javascript" src="scripts/jquery-ui/jquery-ui-1.10.4.custom.js"></script>
+    <link type="text/css" rel="stylesheet" href="scripts/jquery-ui/jquery-ui-1.10.4.custom.css">
+
+    <!--Proportion-->
+    <script type="text/javascript" src="scripts/proportion.js"></script>
+
+    <!--Redimensionar-->
+    <script type="text/javascript" src="scripts/plugins/redimensionar.js"></script>
+
+    <!--Expand-->
+    <script type="text/javascript" src="scripts/plugins/expand/expand.js"></script>
+    <link type="text/css" rel="stylesheet" href="scripts/plugins/expand/expand.css" >
+
+    <!--Cortar texto-->
+    <script type="text/javascript" src="scripts/plugins/cortar_texto.js"></script>
+
+    <!--Canvas-->
+    <link type="text/css" rel="stylesheet" href="styles/canvas.css">
+
+	<!-- keyboard widget css & script (required) -->
+	<link href="scripts/plugins/keyboard-master/css/keyboard.css" rel="stylesheet">
+	<script src="scripts/plugins/keyboard-master/js/jquery.keyboard.js"></script>
+	<script src="scripts/plugins/keyboard-master/js/jquery.mousewheel.js"></script>
+
+    <style>
+   
+    </style>
+
+<script type="text/javascript">
+$(function(){
+
+	// Custom: Hidden Input
+	// click on a link - add focus to hidden input
+	// ********************
+	jq18('.hiddenInput').click(function(){
+		jq18('#hidden').trigger('focus.keyboard');
+		return false;
+	});
+	// Initialize keyboard script on hidden input
+	// set "position.of" to the same link as above
+	jq18('#hidden').keyboard({ 
+		layout: 'qwerty',
+		position     : {
+			of : jq18('.hiddenInput'),
+			my : 'center top',
+			at : 'center top'
+		}
+	});
+
+	
+	$("li[id=teste]:last").css({"background-color":"red"});
+});
+</script>
+
+</head>
+<body>
+
+<ul>
+    <li>
+        <a href="#" class="hiddenInput">Hidden input</a>
+		<input id="hidden" type="text" style="display:none;">
+    </li>
+    <li>Arantes</li>
+    <li>Fernandes</li>
+</ul>
+
+
+
+<ul>
+    <li id="teste">asdf</li>
+    <li id="teste">asdf</li>
+    <li id="teste">asdf</li>
+    <li id="">asdf</li>
+    <li id="">asdf</li>
+</ul>
+</body>
+</html>

@@ -83,7 +83,7 @@ h1{ margin:0; padding:0; font-size:1em; }
 
     #requisitos{
         margin:-6% 0 0 0;
-        height:62.2%;
+        height:62%;
     }
 
     #beneficios{
@@ -155,7 +155,7 @@ h1{ margin:0; padding:0; font-size:1em; }
 
     #area .postit{
         width:98%;
-        height:auto;
+        height:20px;
         background-color:yellow;
         margin:0 0 2% 0;
     }
@@ -174,19 +174,18 @@ h1{ margin:0; padding:0; font-size:1em; }
         cursor:pointer;   
     }
 
-/*OPEN POST-ITS=========================*/
-    .openpostits{
+/*OPEN POST-ITS e NEW POSTIT=========================*/
+    .openpostits, .newpostit{
         width:40;
         height:40;
         position:absolute;
-        background-color:orange;
         border-radius: 50%;
         left:0;
     }
-    .openpostits:hover{
+    .openpostits:hover, .newpostit:hover{
         cursor:pointer;
     }
-    .openpostits span{
+    .openpostits span, .newpostit span{
         position:absolute;
         top:25%;
         width:100%;
@@ -194,6 +193,16 @@ h1{ margin:0; padding:0; font-size:1em; }
         font-size:1.25em;
         font-weight:bold;
     }
+
+    .openpostits{
+        background-color:orange;        
+    }
+
+    .newpostit{
+        background-color:brown;  
+        top:40;        
+    }
+    
     
 
 
