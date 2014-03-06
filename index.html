@@ -5,10 +5,10 @@
 
     <!--jQuery + jQuery UI-->
     <!--jQuery 1.8-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-	<script type="text/javascript">
-	    var jq18 = jQuery.noConflict();
-    </script>
+<!--	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
+<!--	<script type="text/javascript">-->
+<!--	    var jq18 = jQuery.noConflict();-->
+<!--    </script>-->
         
     <!--jQuery 2.1-->
     <script type="text/javascript" src="scripts/jquery/jquery-2.1.0.js"></script>        
@@ -55,9 +55,13 @@
 
             //UL.RECEBERPOSTIT=======================================
             //sortable
-            $( "ul.receberpostit" ).sortable({
-                connectWith: "ul.receberpostit",
-            });     
+            $( "ul.receberpostit" )
+                .sortable({
+                    connectWith: "ul.receberpostit",
+                })
+                .on("dblclick","li",function(){ //expand (o método ON é para aplicar nos objetos criados dinamicamente)
+                    $(this).expand("postit");
+                });
 
 
             //.POSTITS=======================================
@@ -132,7 +136,6 @@
                             });                
                         }  
 
-
             //NEWPOSTIT=======================================
             //draggable
             $(".newpostit")
@@ -148,41 +151,26 @@
                             },
                             drop: function(event,ui){   
                                 var id = $(this).attr("id"); 
-                                $("#"+id+" > ul.receberpostit").append('<li postit-id="0" class="postit" autor="Filipe Arantes" areacandidata="'+id+'">ASDF</li>');
-                                $("#"+id+" > ul.receberpostit > li:last").expand("postit");
-                                
-                                mostrarTeclado();
+                                $("#"+id+" > ul.receberpostit").append('<li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
+                                $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
                             }                           
                         });
-                }).click(function(event,ui){
-
+                }).click(function(){
+                    
                 });
-                        function mostrarTeclado(){
-                            $("#container_keyboard").css({"display":"block"});
-                        }
-                          
+                                                          
 
             //#AREA > LI=======================================
-            //inserir ícone de zoom nas áreas do canvas
             $("#area > li")
-                .each(function(){
+                .each(function(){ //inserir ícone de zoom nas áreas do canvas
                     idarea = $(this).attr("id");
                     $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
                 });
-            
+                        
 
-            //LI.POSTIT=======================================
-            //expand
-            $(".postit")
-                .dblclick(function(){
-                    $(this).expand("postit");
-                });
-            
-
-            //DIV.ZOOMAREA A=======================================
-            //expand                      
+            //DIV.ZOOMAREA A=======================================                               
             $("div.zoomarea a")
-                .dblclick(function(){
+                .dblclick(function(){ //expand   
                     $(this).expand("area");
                 });
                 
@@ -194,78 +182,77 @@
 
             //.TEXTO=======================================
             $(".texto")
-                .css({"visibility":"hidden"});            
-          
+                .css({"visibility":"hidden"});  
 
             //CONTEINER_KEYBOARD=======================================
             $("#container_keyboard")
-                .draggable();
-
+                .draggable();                         
         });
      </script>
 </head>
 <body>
-
 <div class="openpostits"><span>P's</span></div>
 <div class="newpostit"><span>NP</span></div>
 
-<div id="container_keyboard">
-	<ul id="keyboard">
-		<li class="symbol"><span class="off">`</span><span class="on">~</span></li>
-		<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
-		<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
-		<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
-		<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
-		<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
-		<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
-		<li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
-		<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
-		<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
-		<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
-		<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
-		<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
-		<li class="delete lastitem">delete</li>
-		<li class="tab">tab</li>
-		<li class="letter">q</li>
-		<li class="letter">w</li>
-		<li class="letter">e</li>
-		<li class="letter">r</li>
-		<li class="letter">t</li>
-		<li class="letter">y</li>
-		<li class="letter">u</li>
-		<li class="letter">i</li>
-		<li class="letter">o</li>
-		<li class="letter">p</li>
-		<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
-		<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
-		<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
-		<li class="capslock">caps lock</li>
-		<li class="letter">a</li>
-		<li class="letter">s</li>
-		<li class="letter">d</li>
-		<li class="letter">f</li>
-		<li class="letter">g</li>
-		<li class="letter">h</li>
-		<li class="letter">j</li>
-		<li class="letter">k</li>
-		<li class="letter">l</li>
-		<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
-		<li class="symbol"><span class="off">'</span><span class="on">"</span></li>
-		<li class="return lastitem">return</li>
-		<li class="left-shift">shift</li>
-		<li class="letter">z</li>
-		<li class="letter">x</li>
-		<li class="letter">c</li>
-		<li class="letter">v</li>
-		<li class="letter">b</li>
-		<li class="letter">n</li>
-		<li class="letter">m</li>
-		<li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
-		<li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
-		<li class="symbol"><span class="off">/</span><span class="on">?</span></li>
-		<li class="right-shift lastitem">shift</li>
-		<li class="space lastitem">&nbsp;</li>
-	</ul>
+<div id="teclado">
+    <div id="container_keyboard">
+	    <ul id="keyboard">
+		    <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+		    <li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+		    <li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+		    <li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+		    <li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+		    <li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+		    <li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+		    <li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
+		    <li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+		    <li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+		    <li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+		    <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+		    <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+		    <li class="delete lastitem">delete</li>
+		    <li class="tab">tab</li>
+		    <li class="letter">q</li>
+		    <li class="letter">w</li>
+		    <li class="letter">e</li>
+		    <li class="letter">r</li>
+		    <li class="letter">t</li>
+		    <li class="letter">y</li>
+		    <li class="letter">u</li>
+		    <li class="letter">i</li>
+		    <li class="letter">o</li>
+		    <li class="letter">p</li>
+		    <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+		    <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+		    <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+		    <li class="capslock">caps lock</li>
+		    <li class="letter">a</li>
+		    <li class="letter">s</li>
+		    <li class="letter">d</li>
+		    <li class="letter">f</li>
+		    <li class="letter">g</li>
+		    <li class="letter">h</li>
+		    <li class="letter">j</li>
+		    <li class="letter">k</li>
+		    <li class="letter">l</li>
+		    <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+		    <li class="symbol"><span class="off">'</span><span class="on">"</span></li>
+		    <li class="return lastitem">return</li>
+		    <li class="left-shift">shift</li>
+		    <li class="letter">z</li>
+		    <li class="letter">x</li>
+		    <li class="letter">c</li>
+		    <li class="letter">v</li>
+		    <li class="letter">b</li>
+		    <li class="letter">n</li>
+		    <li class="letter">m</li>
+		    <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+		    <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+		    <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+		    <li class="right-shift lastitem">shift</li>
+		    <li class="space lastitem">&nbsp;</li>
+	    </ul>
+    </div>
 </div>
 
 
@@ -320,9 +307,7 @@
 
         <ul id="area" class="area">
             <li id="just" class="margem_direita margem_embaixo"><h1>JUSTIFICATIVAS</h1>
-                <ul class="receberpostit">
-                    <li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="just"></li>
-                </ul>
+                <ul class="receberpostit"></ul>
             </li>
 
             <li id="prod" class="margem_direita margem_embaixo"><h1>PRODUTO</h1>

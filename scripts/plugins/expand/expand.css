@@ -3,6 +3,7 @@
     height:100%;
     position:absolute;
     top:0%;
+    font-size:0.75em;
 }
 
 .bigpostit{
@@ -10,7 +11,7 @@
     height:70%;
     background-color:yellow;
     top:14.5%;
-    left:30%;
+    left:29%;
     padding:1%;
     z-index:1;
     font-size:2em;
@@ -22,6 +23,19 @@
 .sem_fundo{
     background-color:rgba(0,0,0,0);
 }
+
+.bigpostit #fechar{
+    position:absolute;
+    top:-45;
+    right:-12;
+    font-size:1.5em;
+}
+.bigpostit #fechar a{
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+}
+
 
 .bigareacanvas{
     width:40%;
@@ -41,4 +55,3 @@
     background-color:yellow;
     font-size:0.75em;
 }
-

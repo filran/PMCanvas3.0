@@ -6,15 +6,28 @@
 /*font: 71%/1.5 Verdana, Sans-Serif;*/
 /*background: #eee;*/
 /*}*/
+
+#teclado{
+    width:100%;
+    position:absolute;
+    display:none;
+    bottom:0;
+    z-index:10;
+}
+
 #container_keyboard {
-padding:6px;
+padding:15px;
+margin:0 auto 0 auto;
 width: 688px;
-position:absolute;
-top:200px;
+height:235px;
 background-color:gray;
 z-index:1;
-display:block;
 }
+
+#container_keyboard:hover{
+    cursor:pointer;
+}
+
 /*#write {*/
 /*margin: 0 0 5px;*/
 /*padding: 5px;*/
@@ -40,6 +53,7 @@ list-style: none;
 	text-align: center;
 	background: #fff;
 	border: 1px solid #f9f9f9;
+	font-size:1em;
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 0px;
 	}

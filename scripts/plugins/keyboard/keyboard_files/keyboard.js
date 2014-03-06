@@ -1,9 +1,9 @@
 $(function(){
-	var $write = $('.write'),
+	var $write = $(".write"),
 		shift = false,
 		capslock = false;
 	
-	$('#keyboard li').click(function(){
+	$('#keyboard li').on("click",function(){
 		var $this = $(this),
 			character = $this.html(); // If it's a lowercase letter, nothing happens to this variable
 		
@@ -26,9 +26,9 @@ $(function(){
 		
 		// Delete
 		if ($this.hasClass('delete')) {
-			var html = $write.html();
+			var html = $(".write").html();
 			
-			$write.html(html.substr(0, html.length - 1));
+			$(".write").html(html.substr(0, html.length - 1));
 			return false;
 		}
 		
@@ -50,6 +50,8 @@ $(function(){
 		}
 		
 		// Add the character
-		$write.html($write.html() + character);
+		//$write.html($write.html() + character);
+		$(".write")
+		    .html($(".write").html() + character);
 	});
 });

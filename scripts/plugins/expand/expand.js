@@ -8,29 +8,44 @@
         //o tipo é se for para amplicar post ou área
 
         var time = 100; 
-        
+
         $("<div id='backgroundexpand' class='backgroundexpand'></div>").appendTo("body");
         
         //EXPAND BACKGROUND
         $(".backgroundexpand").css({"z-index":"1","opacity":0}).addClass("com_fundo");
         $(".backgroundexpand").animate({"opacity":1},time);
 
-        if( tipo=="postit" ){
+        if( tipo=="postit" || tipo=="newpostit" ){
             //create elements
             $("<div bigpostit-id='' class='bigpostit'></div>").appendTo(".backgroundexpand");
 
             var id = $(this).attr("postit-id");
+            var autor = $(this).attr("autor");
+            var areacandidata = $(this).attr("areacandidata");
+            
             var selector = "li[postit-id="+id+"]";
             var selectorbig = "div[bigpostit-id="+id+"]";
             var time = 100; 
             var content = $(selector).text();          
 
             $(selector).animate({"opacity":"0"});
-            $("div[bigpostit-id]").attr("bigpostit-id",id);
-            $(selectorbig).animate({"opacity":"1"},time).html(content+"<br>"+id); 
+            $("div[bigpostit-id]").attr("bigpostit-id",id);            
+            $(selectorbig).animate({"opacity":"1"},time);
+
+
+            $(".bigpostit")
+                .append("<div id='autor'>Autor:"+autor+"</div>")
+                .append("<div id='fechar'><a href='#'>X</a></div>") //Botão Fechar
+                .append("<p id='conteudopostit' class='write' contenteditable='true'>"+content+"</p>");
+        
+       
+            //NEWPOSTIT==============================================
+            if( tipo=="newpostit" ){                     
+                $("#teclado").css("display","block");
+            }                
 
             //close
-            $(".backgroundexpand").click(function(){
+            $("#fechar > a").click(function(){
                 $(selectorbig+".bigpostit").animate({"opacity":"0"},time, function(){
                     $(this).remove();     
                     $(".backgroundexpand").animate({"background-color":"rgba(0,0,0,0)"}).css({"z-index":"-1"},time,function(){
@@ -41,6 +56,19 @@
                 $(selector).animate({"opacity":"1"},time,function(){
                     $(".backgroundexpand").remove();
                 });
+
+                if( tipo=="newpostit" ){
+                    $("#teclado").css("display","none");
+                    $("#container_keyboard").removeAttr("style");
+                }
+
+                //atualizar conteudo do postit
+                conteudo = $("#conteudopostit").text();
+                if(conteudo==""){
+                    $(selector).remove();
+                }else{
+                    $(selector).html(conteudo);
+                }
             });
             
         }else if(tipo=="area"){
