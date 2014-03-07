@@ -36,6 +36,10 @@
 	<script type="text/javascript" src="scripts/plugins/keyboard/keyboard_files/keyboard.js"></script>
 	<link type="text/css" rel="stylesheet" href="scripts/plugins/keyboard/keyboard_files/style.css">
 
+
+    <!--Fonts-->
+	<link href='fontes/honey/stylesheet.css' rel='stylesheet' type='text/css'>
+
     
     <script type="text/javascript">
         $(function(){        
@@ -61,6 +65,13 @@
                 })
                 .on("dblclick","li",function(){ //expand (o método ON é para aplicar nos objetos criados dinamicamente)
                     $(this).expand("postit");
+                    fechar_lixeira(100);
+                })
+                .on("mousedown","li",function(){
+                    abrir_lixeira(100);
+                })
+                .on("mouseup","li",function(){
+                    fechar_lixeira(100);
                 });
 
 
@@ -74,7 +85,8 @@
                     $(this).fadeOut(100,function(){
                         $(this).css({"visibility":"hidden"});
                     });
-                });                
+                });
+                                
             //AUTOAJUSTAR POSTITS================================
             /*
             ler quantidade de colunas
@@ -90,6 +102,7 @@
             //.POSTITS .POSTIT=======================================
             $(".postits .postit")
                 .hide();
+
 
 
             //.OPENPOSTIT=======================================
@@ -109,7 +122,7 @@
                                 id = $(this).attr("id");
                                 mostrarPostits(id);
                             }
-                        });
+                        });                                      
                 })
                 .click(function(event,ui){
                     visibility = $(".postits").css("visibility");
@@ -143,20 +156,9 @@
                     containment:"window",                
                 })
                 .mousedown(function(){
-                    $("#area > li")
-                        .droppable({
-                            accept:".newpostit",
-                            activate: function(event,ui){
-                                //$(this).append("activate");
-                            },
-                            drop: function(event,ui){   
-                                var id = $(this).attr("id"); 
-                                $("#"+id+" > ul.receberpostit").append('<li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
-                                $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
-                            }                           
-                        });
+                    criar_novopostit();
                 }).click(function(){
-                    
+                    criar_novopostit();
                 });
                                                           
 
@@ -165,7 +167,7 @@
                 .each(function(){ //inserir ícone de zoom nas áreas do canvas
                     idarea = $(this).attr("id");
                     $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
-                });
+                });                
                         
 
             //DIV.ZOOMAREA A=======================================                               
@@ -178,21 +180,64 @@
             //CORTAR TEXTO DOS POST-IT=======================================
             $(".postit")
                 .cortar_texto(50);
-
+            
 
             //.TEXTO=======================================
             $(".texto")
                 .css({"visibility":"hidden"});  
 
+
             //CONTEINER_KEYBOARD=======================================
             $("#container_keyboard")
-                .draggable();                         
+                .draggable();   
+
+
+            //LIXEIRA=======================================
+            $("#lixeira").droppable({
+                accept:".postit",
+                tolerance:"touch",
+                drop:function(event,ui){
+                    $(ui.draggable).remove();                    
+                }
+            });
+
+
+            //FUNÇÕES==============================
+            //CRIAR NOVO POST-IT
+            function criar_novopostit(){
+                $("#area > li")
+                    .droppable({
+                        accept:".newpostit",
+                        drop: function(event,ui){   
+                            var id = $(this).attr("id"); 
+                            $("#"+id+" > ul.receberpostit").append('<li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
+                            $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
+                        }                           
+                    });    
+            }
+
+            
+            //LIXEIRA
+            function abrir_lixeira(time){
+                clearTimeout(this.downTimer);
+                this.downTimer = setTimeout(function() {
+                    $("#lixeira").animate({"top":"0"},time);
+                },500);
+            }
+            function fechar_lixeira(time){
+                clearTimeout(this.downTimer);
+                $("#lixeira").animate({"top":"-50"},time);
+            }
         });
+
+    
+        
      </script>
 </head>
 <body>
 <div class="openpostits"><span>P's</span></div>
 <div class="newpostit"><span>NP</span></div>
+<div id="lixeira"></div>
 
 <div id="teclado">
     <div id="container_keyboard">
@@ -276,29 +321,28 @@
         <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="obj">
             Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500
         </li>
-        <li postit-id="1" class="postit" autor="Filipe Arantes" areacandidata="just">
+        <li postit-id="7" class="postit" autor="Filipe Arantes" areacandidata="just">
             Colesterol aumentado
         </li>
-        <li postit-id="2" class="postit" autor="Filipe Arantes" areacandidata="just">
+        <li postit-id="8" class="postit" autor="Filipe Arantes" areacandidata="just">
             Imagem mal cuidada
         </li>
-        <li postit-id="3" class="postit" autor="Filipe Arantes" areacandidata="just">
+        <li postit-id="9" class="postit" autor="Filipe Arantes" areacandidata="just">
             Mobilidade reduzida
         </li>
-        <li postit-id="4" class="postit" autor="Filipe Arantes" areacandidata="just">
+        <li postit-id="10" class="postit" autor="Filipe Arantes" areacandidata="just">
             Roupas não vestem
         </li>
-        <li postit-id="5" class="postit" autor="Filipe Arantes" areacandidata="just">
+        <li postit-id="11" class="postit" autor="Filipe Arantes" areacandidata="just">
             Eu reeducado e 10kg mais magro
         </li>
-        <li postit-id="6" class="postit" autor="Filipe Arantes" areacandidata="obj">
+        <li postit-id="12" class="postit" autor="Filipe Arantes" areacandidata="obj">
             Emagrecer 10kg com saúde até 28fev, tendo apoio multidisciplinar e incorporando hábitos saudáveis, gastando até R$ 6.500
         </li>
     </ul>        
 </ul>
 
 <div id="wrap" class="centralizar_div">
-
     <ul id="pmcanvas">
         <ul id="header">
             <li id="gp"><div><h1>GP</h1></div></li>

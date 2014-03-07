@@ -5,7 +5,6 @@ body{ font-family:"Arial"; margin:0; padding:0; overflow:hidden; background-colo
 
 h1{ margin:0; padding:0; font-size:1em; }
 
-
 /*CANVAS'S LAYOUT=============================*/
     #wrap{
         width:800;
@@ -147,7 +146,8 @@ h1{ margin:0; padding:0; font-size:1em; }
         background-color:yellow;
         margin:4px;
         padding:4px;
-        float:left;  
+        float:left;
+        z-index:2;  
     }    
     
     .postit:hover{ cursor:pointer; z-index:1; }
@@ -204,8 +204,6 @@ h1{ margin:0; padding:0; font-size:1em; }
     }
     
     
-
-
 /*ZOOM AREA==============================*/
 .zoomarea{
     position:relative;
@@ -219,4 +217,16 @@ h1{ margin:0; padding:0; font-size:1em; }
 }
 .zoomarea a:hover{
     color:gray;
+}
+
+
+/*LIXEIRA==============================*/
+#lixeira{
+    width:50;
+    height:50;
+    background-color:rgba(200,0,0,0.8);
+    position:absolute;
+    top:-50;
+    right:0;
+    z-index:1;
 }

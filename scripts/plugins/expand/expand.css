@@ -24,16 +24,16 @@
     background-color:rgba(0,0,0,0);
 }
 
-.bigpostit #fechar{
+.bigpostit #fechar, .bigpostit #abrirteclado{
     position:absolute;
-    top:-45;
-    right:-12;
     font-size:1.5em;
+    top:-45;
 }
-.bigpostit #fechar a{
-    color:white;
-    font-weight:bold;
-    text-decoration:none;
+.bigpostit #fechar{
+    right:0;
+}
+.bigpostit #abrirteclado{
+    right:55;
 }
 
 
@@ -54,4 +54,20 @@
     height:150px;
     background-color:yellow;
     font-size:0.75em;
+}
+
+#wrapconteudopostit{
+    width:100%;
+    height:94%;
+    margin:2% 0 0 0;    
+}
+
+#conteudopostit{
+    font-family: 'honey_scriptsemibold';
+    font-size:4.5em;
+    text-align:center;
+    line-height:1em;
+    margin:0;
+    width:100%;
+    position:relative;
 }
