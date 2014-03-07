@@ -28,7 +28,7 @@ $(function(){
 		if ($this.hasClass('delete')) {
 			var html = $(".write").html();
 			
-			$(".write").html(html.substr(0, html.length - 1));
+			$(".write").html( html.substr(0, html.length - 1));
 			return false;
 		}
 		

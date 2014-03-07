@@ -36,10 +36,11 @@
 	<script type="text/javascript" src="scripts/plugins/keyboard/keyboard_files/keyboard.js"></script>
 	<link type="text/css" rel="stylesheet" href="scripts/plugins/keyboard/keyboard_files/style.css">
 
-
     <!--Fonts-->
 	<link href='fontes/honey/stylesheet.css' rel='stylesheet' type='text/css'>
 
+    <!--Cursor-->
+    <script type="text/javascript" src="scripts/plugins/cursor/cursor.js"></script>
     
     <script type="text/javascript">
         $(function(){        
@@ -186,10 +187,9 @@
             $(".texto")
                 .css({"visibility":"hidden"});  
 
-
             //CONTEINER_KEYBOARD=======================================
             $("#container_keyboard")
-                .draggable();   
+                .draggable(); 
 
 
             //LIXEIRA=======================================
@@ -215,7 +215,6 @@
                         }                           
                     });    
             }
-
             
             //LIXEIRA
             function abrir_lixeira(time){
@@ -237,7 +236,7 @@
 <body>
 <div class="openpostits"><span>P's</span></div>
 <div class="newpostit"><span>NP</span></div>
-<div id="lixeira"></div>
+<div id="lixeira"><img src='imagens/icones/dustbin.png'/></div>
 
 <div id="teclado">
     <div id="container_keyboard">

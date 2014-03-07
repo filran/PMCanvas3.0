@@ -24,16 +24,20 @@
     background-color:rgba(0,0,0,0);
 }
 
-.bigpostit #fechar, .bigpostit #abrirteclado{
+.bigpostit #fechar, .bigpostit #abrirteclado, .bigpostit #excluir{
     position:absolute;
-    font-size:1.5em;
-    top:-45;
 }
 .bigpostit #fechar{
     right:0;
+    top:-37;
 }
 .bigpostit #abrirteclado{
     right:55;
+    top:-35;
+}
+.bigpostit #excluir{
+    right:120;
+    top:-36;
 }
 
 
