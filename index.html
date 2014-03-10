@@ -43,7 +43,7 @@
     <script type="text/javascript" src="scripts/plugins/cursor/cursor.js"></script>
     
     <script type="text/javascript">
-        $(function(){        
+        $(function(){                    
             //#WRAP=======================================
             //Redimensionar
             $("#wrap").redimensionar();
@@ -139,9 +139,14 @@
                     }                
                 });
                         function mostrarPostits(id){        
-                            $(".postits .postit[areacandidata="+id+"]").show();                     
-                            $(".postits").css({"visibility":"show"}).fadeIn(100);
-                            $(".postits").attr("drop",id);
+                            $(".postits .postit[areacandidata="+id+"]")             
+                                .each(function(i){
+                                    if( i>=0 ){
+                                        $(this).show();
+                                        $(".postits").css({"visibility":"show"}).fadeIn(100);
+                                        $(".postits").attr("drop",id);
+                                    }
+                                });                 
                         }
                         function ocultarPostits(){
                             $(".postits").fadeOut(100,function(){
@@ -158,8 +163,9 @@
                 })
                 .mousedown(function(){
                     criar_novopostit();
-                }).click(function(){
-                    criar_novopostit();
+                })
+                .mouseenter(function(){
+                    criar_novopostit_com_click();
                 });
                                                           
 
@@ -208,12 +214,27 @@
                 $("#area > li")
                     .droppable({
                         accept:".newpostit",
-                        drop: function(event,ui){   
+                        drop: function(event,ui){ 
                             var id = $(this).attr("id"); 
-                            $("#"+id+" > ul.receberpostit").append('<li postit-id="-1" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
+                            var postitid = event.timeStamp;
+                            $("#"+id+" > ul.receberpostit").append('<li postit-id="'+postitid+'" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
                             $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
                         }                           
                     });    
+            }
+            function criar_novopostit_com_click(){
+                $("#area > li")
+                    .droppable({
+                        over: function(event,ui){
+                            var id = $(this).attr("id"); 
+                            var postitid = event.timeStamp;
+                            
+                            $(ui.draggable).click(function(){
+                                $("#"+id+" > ul.receberpostit").append('<li postit-id="'+postitid+'" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
+                                $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
+                            });
+                        }
+                    });
             }
             
             //LIXEIRA

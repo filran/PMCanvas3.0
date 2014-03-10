@@ -59,13 +59,7 @@
 
             if( tipo=="newpostit" ){
                 //Indicar local para digitar
-                texto_anotacao = "Sua anotação aqui";
-                conteudo_postit = $("#conteudopostit").text();
-                $("#conteudopostit")
-                    .html(texto_anotacao)
-                    .one("click",function(){
-                        $(this).html("");
-                    });                
+                $("#conteudopostit").focus();
             }
 
             //EXCLUIR POSTIT
@@ -84,8 +78,8 @@
             });              
 
             //CLOSE
-            $("#fechar").click(function(){
-                fechar_postit("fechar");       
+            $(".bigpostit > div").on("click","#fechar",function(){
+                fechar_postit("fechar");  
             });
             
         }else if(tipo=="area"){
@@ -146,7 +140,7 @@
 
         //fehcar postit
         function fechar_postit(tipo){
-            if( tipo=="fechar" || tipo=="excluir" ){
+            if( tipo=="fechar" || tipo=="excluir" ){  
                 $(selectorbig+".bigpostit").animate({"opacity":"0"},time, function(){
                     $(this).remove();     
                     $(".backgroundexpand").animate({"background-color":"rgba(0,0,0,0)"}).css({"z-index":"-1"},time,function(){
