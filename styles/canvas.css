@@ -1,9 +1,19 @@
 /*LAYOUT STANDARD ======================= */
 ul{ list-style-type: none; margin:0px; padding:0px;}
 
-body{ font-family:"Arial"; margin:0; padding:0; overflow:hidden; background-color:#ccc;}
+body{
+    font-family:"Arial";
+    margin:0;
+    padding:0;
+    overflow:hidden;     
+    background: -webkit-radial-gradient(ellipse cover, #fff, #bbb); /*web kit*/
+    background: -moz-radial-gradient(ellipse cover, #fff, #bbb);/*mozilla*/
+    background: -ms-radial-gradient(circle cover, #fff, #bbb); /*internet explorer*/
+}
 
 h1{ margin:0; padding:0; font-size:1em; }
+
+img{ border:none; }
 
 /*CANVAS'S LAYOUT=============================*/
     #wrap{
@@ -46,6 +56,17 @@ h1{ margin:0; padding:0; font-size:1em; }
         width:40%;
     }
 
+    #area > li > h1{
+        margin: 0.3% 0 0 0.2%;
+        position:absolute;
+        color:#333;
+        display:inline;
+    }
+
+    #area > #stake > h1, #area > #tempo > h1{
+        margin-top:0;
+    }
+
     .area li{
         width:17%;
         padding:1%;
@@ -85,7 +106,7 @@ h1{ margin:0; padding:0; font-size:1em; }
         height:62%;
     }
 
-    #beneficios{
+    #restricoes{
         margin:29.5% 0 0 -60%;
         width:37%;
         height:14.7%;
@@ -107,9 +128,38 @@ h1{ margin:0; padding:0; font-size:1em; }
         height:30%;
     }
 
-    #restricoes{
+    #beneficios{
         height:40%;
         margin:10.5% 0 0 -100%;
+    }
+
+    /*formatando as áreas*/
+    #just, #obj, #beneficios{
+        background-color:#cc99cc;
+    }
+    #prod, #requisitos{
+        background-color:#ffcc00;
+    }
+    #stake, #equipe{
+        background-color:#fff;
+    }    
+    #premissas, #entregas, #restricoes{
+        background-color:#66ccff;
+    }
+    #riscos, #tempo, #custos{
+        background-color:#99cc33;
+    }
+
+    #stake #externos{
+        display:block;
+        text-align:center;
+        margin-top:-5;
+    }
+    #stake #fatores_externos, #just #passado{
+        display:block;
+        text-align:center;
+        margin-top:-5;
+        font-size:0.75em;
     }
 
 
@@ -132,13 +182,21 @@ h1{ margin:0; padding:0; font-size:1em; }
     }
 
     /*ajustando área para receber os postits*/
-    #area > li > ul.receberpostit{ width:100%;}
-    #just ul , #prod ul{ height:90%; }
-    #stake ul , #premissas ul, #riscos ul, #tempo ul{ height:92%; }
-    #obj ul, #custos ul{ height:88%; }
-    #restricoes ul, #equipe ul, #entregas ul{ height:94%; }
-    #requisitos ul{ height:96%; }
-    #beneficios ul{ height:85%; }
+    #area > li > ul.receberpostit{ width:100%; margin-top:2%; }
+    #area > #just > ul.receberpostit{ margin-top:4%; }
+    #area > #stake > ul.receberpostit{ margin-top:8%; }
+    #just ul{ height:80%; }
+    #prod ul{ height:82%; }
+    #premissas ul{ height:88%; }
+    #stake ul{ height:82%; }
+    #riscos ul{ height:86%; }
+    #obj ul, #custos ul{ height:80%; }
+    #beneficios ul, #entregas ul{ height:90%; }
+    #equipe ul{ height:89%; }
+    #requisitos ul{ height:94%; }
+    #entregas ul{ height:85%; }
+    #restricoes ul{ height:70%; }
+    #tempo ul{ height:92%; }
     
     .postit{
         width:100px;
