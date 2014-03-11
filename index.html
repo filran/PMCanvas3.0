@@ -77,12 +77,18 @@
                 });
 
 
+            /*$( "#area > li > ul.receberpostit" )
+                .on("mouseup","li",function(){
+                    atualizar_areacandidata(this);
+                })*/
+
+
+
             //.POSTITS=======================================
             //abrir e fechar openpostits
             $(".postits")
                 .css({"visibility":"hidden"})
                 .draggable({})
-                .resizable()
                 .dblclick(function(){
                     $(this).fadeOut(100,function(){
                         $(this).css({"visibility":"hidden"});
@@ -104,7 +110,6 @@
             //.POSTITS .POSTIT=======================================
             $(".postits .postit")
                 .hide();
-
 
 
             //.OPENPOSTIT=======================================
@@ -166,7 +171,7 @@
                     criar_novopostit();
                 })
                 .mouseenter(function(){
-                    criar_novopostit_com_click();
+                    //criar_novopostit_com_click();
                 });
                                                           
 
@@ -188,7 +193,7 @@
             //CORTAR TEXTO DOS POST-IT=======================================
             $(".postit")
                 .cortar_texto(50);
-            
+                    
 
             //.TEXTO=======================================
             $(".texto")
@@ -268,6 +273,13 @@
                 clearTimeout(this.downTimer);
                 $("#lixeira").animate({"top":"-50"},time);
             }
+
+
+            function atualizar_areacandidata(seletor){
+                var id = $(seletor).parent().parent().get(0).id; //id area
+                $(seletor).attr("areacandidata",id);
+            }
+
         });
 
     
