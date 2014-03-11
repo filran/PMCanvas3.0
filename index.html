@@ -42,8 +42,9 @@
     <!--Cursor-->
     <script type="text/javascript" src="scripts/plugins/cursor/cursor.js"></script>
     
-    <script type="text/javascript">
-        $(function(){                    
+    <script type="text/javascript">              
+        $(function(){             
+                 
             //#WRAP=======================================
             //Redimensionar
             $("#wrap").redimensionar();
@@ -209,29 +210,48 @@
 
 
             //FUNÇÕES==============================
+            //ID ÚNICO (construido por data, mês, ano, hora, minuto, segundos, milisegundos e index)
+            function idunico(dom){
+                var data = new Date();
+                var id_unico_data = data.getDate()+""+data.getMonth()+""+data.getYear()+""+data.getHours()+""+ data.getMinutes()+""+data.getSeconds()+""+data.getMilliseconds();  
+                var index = $(dom).index();
+                
+                return id_unico_data+index;
+            }
+            
             //CRIAR NOVO POST-IT
-            function criar_novopostit(){
+            function cerne_para_criar_post_it(id){
+                //cria o postit
+                $("#"+id+" > ul.receberpostit")
+                    .append('<li class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
+                var ultimo_postit = "#"+id+" > ul.receberpostit > li:last"; //ultimo post-it
+                var id_unico = idunico(ultimo_postit); //cria id unico
+
+                //set o id do post-it
+                $(ultimo_postit).attr("postit-id",id_unico);
+                
+                //expande o post-it        
+                $(ultimo_postit)
+                    .expand("newpostit");                
+            }            
+            function criar_novopostit(){ // criar novo post-it com mousedown
                 $("#area > li")
                     .droppable({
                         accept:".newpostit",
                         drop: function(event,ui){ 
-                            var id = $(this).attr("id"); 
-                            var postitid = event.timeStamp;
-                            $("#"+id+" > ul.receberpostit").append('<li postit-id="'+postitid+'" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
-                            $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
+                            var id = $(this).attr("id");  //id da area
+                            cerne_para_criar_post_it(id);
                         }                           
                     });    
             }
             function criar_novopostit_com_click(){
+                var id_unico = idunico();
                 $("#area > li")
                     .droppable({
                         over: function(event,ui){
-                            var id = $(this).attr("id"); 
-                            var postitid = event.timeStamp;
-                            
+                            var id = $(this).attr("id");                             
                             $(ui.draggable).click(function(){
-                                $("#"+id+" > ul.receberpostit").append('<li postit-id="'+postitid+'" class="postit" autor="Filipe Arantes" areacandidata="'+id+'"></li>');
-                                $("#"+id+" > ul.receberpostit > li:last").expand("newpostit");
+                                cerne_para_criar_post_it(id);
                             });
                         }
                     });
