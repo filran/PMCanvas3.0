@@ -76,11 +76,11 @@
                     fechar_lixeira(100);
                 });
 
-
-            /*$( "#area > li > ul.receberpostit" )
+            //#AREA > LI > UL.RECEBERPOSTIT=======================================
+            $( "#area > li > ul.receberpostit" )
                 .on("mouseup","li",function(){
                     atualizar_areacandidata(this);
-                })*/
+                })
 
 
 
@@ -144,15 +144,20 @@
                         }
                     }                
                 });
-                        function mostrarPostits(id){        
+                        function mostrarPostits(id){       
+                            var cont=0; 
                             $(".postits .postit[areacandidata="+id+"]")             
                                 .each(function(i){
                                     if( i>=0 ){
                                         $(this).show();
                                         $(".postits").css({"visibility":"show"}).fadeIn(100);
                                         $(".postits").attr("drop",id);
+                                        cont++;
                                     }
-                                });                 
+                                });
+                            if( cont==0 ){
+                                alert("Não há post-it.");
+                            }
                         }
                         function ocultarPostits(){
                             $(".postits").fadeOut(100,function(){
@@ -180,7 +185,7 @@
                 .each(function(){ //inserir ícone de zoom nas áreas do canvas
                     idarea = $(this).attr("id");
                     $(this).append("<div class='zoomarea'><a href='#' id='zoomarea_"+idarea+"'>+</a></div>");
-                });                
+                });               
                         
 
             //DIV.ZOOMAREA A=======================================                               
